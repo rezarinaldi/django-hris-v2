@@ -1,7 +1,7 @@
 import time
 
-from .models import Payroll
 from ..employees.models import Employee
+from .models import Payroll
 
 
 def process_payrolls():
@@ -10,11 +10,15 @@ def process_payrolls():
 
     for employee in employees:
         salary = employee.salary
-        print(f"Processing payroll for employee {employee.full_name} with amount {employee.salary}")
-        payroll = Payroll.objects.create(actor=employee.actor, amount=salary, status='pending')
+        print(
+            f"Processing payroll for employee {employee.full_name} with amount {employee.salary}"
+        )
+        payroll = Payroll.objects.create(
+            actor=employee.actor, amount=salary, status="pending"
+        )
 
         time.sleep(15)
-        payroll.status = 'paid'
+        payroll.status = "paid"
         payroll.save()
 
         time.sleep(15)

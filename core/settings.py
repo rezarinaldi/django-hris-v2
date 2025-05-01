@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "apps.payrolls",
     "apps.leaves",
     "apps.authentications",
-    "huey.contrib.djhuey"
+    "huey.contrib.djhuey",
 ]
 
 MIDDLEWARE = [

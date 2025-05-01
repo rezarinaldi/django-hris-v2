@@ -4,13 +4,15 @@ from django.db import models
 from core.models import BaseModel
 
 ROLE_CHOICES = (
-    ('user', 'User'),
-    ('manager', 'Manager'),
+    ("user", "User"),
+    ("manager", "Manager"),
 )
+
 
 class EmployeeSetting(BaseModel):
     actor = models.OneToOneField(User, on_delete=models.CASCADE)
-    role = models.CharField(max_length=120, choices=ROLE_CHOICES, default='user')
+    role = models.CharField(max_length=120, choices=ROLE_CHOICES, default="user")
+
 
 class Employee(BaseModel):
     actor = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)

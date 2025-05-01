@@ -1,7 +1,8 @@
 from django.views.generic import ListView
-from apps.employees.models import Employee
+
+from apps.employees.models import Employee, EmployeeSetting
 from core.views import LoginRequiredMixinView
-from apps.employees.models import EmployeeSetting
+
 
 class EmployeeListView(LoginRequiredMixinView, ListView):
     model = Employee

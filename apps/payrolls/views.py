@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.views.generic import ListView, View
-from apps.payrolls.models import Payroll
+
 from apps.employees.models import Employee, EmployeeSetting
+from apps.payrolls.models import Payroll
 from apps.payrolls.tasks import process_payrolls_task
 from core.views import LoginRequiredMixinView
 
@@ -20,20 +21,21 @@ class PayrollListView(LoginRequiredMixinView, ListView):
         employee = Employee.objects.filter(actor=self.request.user).first()
         user_settings = EmployeeSetting.objects.get(actor=self.request.user)
 
-        context['employee'] = employee
-        context['user_settings'] = user_settings
+        context["employee"] = employee
+        context["user_settings"] = user_settings
 
         return context
+
 
 class PayrollProcessView(LoginRequiredMixinView, View):
     def get(self, request):
         user_settings = EmployeeSetting.objects.get(actor=request.user)
-        return render(request, 'payroll_process.html', {'user_settings': user_settings})
+        return render(request, "payroll_process.html", {"user_settings": user_settings})
 
     def post(self, request):
-        action = request.POST.get('action')
+        action = request.POST.get("action")
 
-        if action == 'process':
+        if action == "process":
             process_payrolls_task()
 
-        return redirect('payroll-process')
+        return redirect("payroll-process")

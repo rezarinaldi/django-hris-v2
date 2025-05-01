@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
 from apps import announcements
 
@@ -8,5 +8,5 @@ urlpatterns = [
     path("", include("apps.announcements.urls")),
     path("", include("apps.employees.urls")),
     path("", include("apps.payrolls.urls")),
-    path("", include("apps.authentications.urls"))
+    path("", include("apps.authentications.urls")),
 ]
